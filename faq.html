@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aura | FAQ</title>
+  <style>
+    :root {
+      --primary-color: #f4d9e9;
+      --secondary-color: #e6a5c4;
+      --accent-color: #c86b9c;
+      --text-color: #4a4a4a;
+      --light-text: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #fcfcfc;
+      color: var(--text-color);
+    }
+
+    .container {
+      width: 90%;
+      max-width: 900px;
+      margin: 50px auto;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 32px;
+      margin-bottom: 30px;
+      color: var(--accent-color);
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .faq-question {
+      background-color: var(--secondary-color);
+      color: var(--light-text);
+      padding: 15px 20px;
+      cursor: pointer;
+      font-weight: 600;
+      position: relative;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 15px 20px;
+      background-color: #fff;
+      color: var(--text-color);
+      border-top: 1px solid #eee;
+    }
+
+    .faq-question::after {
+      content: '+';
+      position: absolute;
+      right: 20px;
+      font-size: 18px;
+      transition: transform 0.3s;
+    }
+
+    .faq-item.active .faq-question::after {
+      transform: rotate(45deg);
+    }
+
+    .faq-item.active .faq-answer {
+      display: block;
+    }
+
+    .show-more-btn,
+    .home-btn {
+      display: block;
+      text-align: center;
+      margin: 30px auto 10px;
+      padding: 12px 30px;
+      background-color: var(--accent-color);
+      color: var(--light-text);
+      border: none;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 16px;
+      transition: background-color 0.3s;
+      cursor: pointer;
+    }
+
+    .show-more-btn:hover,
+    .home-btn:hover {
+      background-color: #b8588a;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Frequently Asked Questions</h1>
+
+    <!-- Always Visible FAQs -->
+    <div class="faq-item">
+      <div class="faq-question">1. Is using a credit card on Aura safe?</div>
+      <div class="faq-answer">Absolutely. We use SSL encryption and certified payment gateways to ensure security.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">2. Do you offer international shipping?</div>
+      <div class="faq-answer">Yes, we ship worldwide. Shipping time and charges vary by location.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">3. What is the return policy?</div>
+      <div class="faq-answer">Returns are accepted within 7 days of delivery for unopened and unused products.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">4. Are your products vegan and cruelty-free?</div>
+      <div class="faq-answer">Yes! All Aura products are 100% vegan and never tested on animals.</div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-question">5. How do I track my order?</div>
+      <div class="faq-answer">You will receive a tracking number by email once your order is dispatched.</div>
+    </div>
+
+    <!-- Hidden FAQs -->
+    <div id="more-faqs" class="hidden">
+      <div class="faq-item">
+        <div class="faq-question">6. Can I cancel or change my order?</div>
+        <div class="faq-answer">You can modify or cancel your order within 2 hours of placing it by contacting support.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">7. Do you provide discounts for first-time buyers?</div>
+        <div class="faq-answer">Yes! Enjoy 10% off your first purchase using the code AURA10 at checkout.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">8. Are Aura concealers suitable for all skin types?</div>
+        <div class="faq-answer">Yes, our formula is dermatologically tested and suits all skin types.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">9. Is Cash on Delivery (COD) available?</div>
+        <div class="faq-answer">Currently, COD is only available for selected locations in India.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">10. How long does delivery take?</div>
+        <div class="faq-answer">Domestic orders take 3–5 working days. International may take 7–15 days depending on the country.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">11. How do I contact customer support?</div>
+        <div class="faq-answer">You can email us at support@auracosmetics.com or use the live chat on our site.</div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">12. Do you have a loyalty program?</div>
+        <div class="faq-answer">Yes! Sign up and start earning points on every purchase.</div>
+      </div>
+    </div>
+
+    <!-- Buttons -->
+    <button class="show-more-btn" id="toggle-btn">Show More</button>
+    <a href="index.html" class="home-btn">Return to Home</a>
+  </div>
+
+  <script>
+    const questions = document.querySelectorAll('.faq-question');
+    const moreFaqs = document.getElementById('more-faqs');
+    const toggleBtn = document.getElementById('toggle-btn');
+
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        const parent = q.parentElement;
+        parent.classList.toggle('active');
+      });
+    });
+
+    toggleBtn.addEventListener('click', () => {
+      moreFaqs.classList.toggle('hidden');
+      toggleBtn.textContent = moreFaqs.classList.contains('hidden') ? 'Show More' : 'Show Less';
+    });
+  </script>
+</body>
+</html>

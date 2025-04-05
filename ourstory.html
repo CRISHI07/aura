@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Our Story</title>
+    <style>
+        :root {
+            --primary-color: #f4d9e9;
+            --secondary-color: #e6a5c4;
+            --accent-color: #c86b9c;
+            --text-color: #4a4a4a;
+            --light-text: #ffffff;
+            --dark-bg: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #fcfcfc;
+            color: var(--text-color);
+        }
+
+        header {
+            background-color: var(--light-text);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .hero {
+            height: 350px;
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hero-content {
+            color: var(--text-color);
+        }
+
+        .hero-title {
+            font-size: 40px;
+            font-weight: 700;
+        }
+
+        .hero-subtitle {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .story-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .story-title {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .story-text {
+            font-size: 18px;
+            line-height: 1.8;
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--text-color);
+        }
+
+        .quote {
+            font-size: 22px;
+            font-style: italic;
+            color: var(--secondary-color);
+            margin: 40px 0;
+        }
+
+        .testimonial-section {
+            background-color: #fef5f9;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .testimonial-title {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .testimonial-box {
+            background-color: white;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 700px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .testimonial-text {
+            font-size: 18px;
+            font-style: italic;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .testimonial-author {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--accent-color);
+        }
+
+        .btn {
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 30px;
+        }
+
+        .btn:hover {
+            background-color: #b8588a;
+        }
+
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 40px 0;
+            margin-top: 80px;
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            color: #aaa;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="header-container">
+            <a href="index.html" class="logo">Aura</a>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">Our Story</h1>
+        <p class="hero-subtitle">Where beauty meets confidence.</p>
+    </div>
+</section>
+
+<section class="story-section">
+    <h2 class="story-title">The Birth of Aura</h2>
+    <p class="story-text">
+        It started with a dream—to redefine beauty with products that embrace all skin tones, textures, and personalities. Aura was born out of a passion for clean, high-performance makeup that doesn’t just sit on the skin but enhances its natural glow.
+    </p>
+    <p class="story-text">
+        We believe in makeup that empowers, inspires, and tells a story—your story. Whether it's a bold lip for confidence or a soft blush for romance, Aura is here to celebrate your beauty, your way.
+    </p>
+    <p class="quote">"Aura isn't just a brand; it's a movement. Beauty is for everyone, and Aura ensures it stays that way." – <strong>Vogue Beauty</strong></p>
+</section>
+
+<section class="testimonial-section">
+    <h2 class="testimonial-title">What People Say About Us</h2>
+    
+    <div class="testimonial-box">
+        <p class="testimonial-text">"Aura has redefined beauty standards. Finally, a brand that understands real skin and creates magic."</p>
+        <p class="testimonial-author">— <strong>Miranda Blake, Celebrity Makeup Artist</strong></p>
+    </div>
+
+    <div class="testimonial-box">
+        <p class="testimonial-text">"Aura is more than makeup; it’s confidence in a bottle. Their concealer? Life-changing."</p>
+        <p class="testimonial-author">— <strong>Harper’s Bazaar</strong></p>
+    </div>
+
+    <div class="testimonial-box">
+        <p class="testimonial-text">"A revolution in beauty! If you haven’t tried Aura yet, you’re missing out on something spectacular."</p>
+        <p class="testimonial-author">— <strong>Emma Clarke, Global Beauty Editor</strong></p>
+    </div>
+
+    <a href="index.html" class="btn">Explore Our Collection</a>
+</section>
+
+<footer>
+    <p class="footer-text">© 2025 Aura Makeup. All rights reserved.</p>
+</footer>
+
+</body>
+</html>

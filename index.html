@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura | Concealers</title>
+    <style>
+        :root {
+            --primary-color: #f4d9e9;
+            --secondary-color: #e6a5c4;
+            --accent-color: #c86b9c;
+            --text-color: #4a4a4a;
+            --light-text: #ffffff;
+            --dark-bg: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        body {
+            background-color: #fcfcfc;
+            color: var(--text-color);
+        }
+        
+        header {
+            background-color: var(--light-text);
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+        
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .main-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        
+        .category-nav {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+            width: 100%;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        
+        .category-nav li a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            text-transform: uppercase;
+            font-size: 14px;
+            transition: color 0.3s;
+            padding: 5px 0;
+            position: relative;
+        }
+        
+        .category-nav li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: width 0.3s;
+        }
+        
+        .category-nav li a:hover {
+            color: var(--accent-color);
+        }
+        
+        .category-nav li a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .search-icon, .cart-icon, .menu-icon {
+            cursor: pointer;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+        
+        .menu-dots {
+            display: flex;
+            gap: 4px;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .dot {
+            width: 5px;
+            height: 5px;
+            background-color: var(--text-color);
+            border-radius: 50%;
+        }
+        
+        .dropdown-menu {
+            position: absolute;
+            top: 25px;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 15px;
+            width: 200px;
+            display: none;
+            z-index: 101;
+        }
+        
+        .dropdown-menu.active {
+            display: block;
+        }
+        
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 0;
+            color: var(--text-color);
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .dropdown-menu a:hover {
+            color: var(--accent-color);
+        }
+        
+        .hero {
+            height: 300px;
+            background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+        }
+        
+        .hero-content {
+            text-align: center;
+            color: var(--text-color);
+        }
+        
+        .hero-title {
+            font-size: 36px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-size: 18px;
+            margin-bottom: 25px;
+            font-weight: 300;
+        }
+        
+        .btn {
+            padding: 12px 25px;
+            background-color: var(--accent-color);
+            color: var(--light-text);
+            border: none;
+            border-radius: 25px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn:hover {
+            background-color: #b8588a;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .product-image {
+            height: 200px;
+            width: 100%;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image img {
+            max-height: 180px;
+            max-width: 80%;
+        }
+        
+        .product-details {
+            padding: 20px;
+        }
+        
+        .product-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 15px;
+        }
+        
+        .product-description {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #777;
+            margin-bottom: 15px;
+        }
+        
+        .add-to-cart {
+            width: 100%;
+            text-align: center;
+        }
+        
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--text-color);
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-btn {
+            padding: 8px 15px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: var(--secondary-color);
+            color: white;
+            border-color: var(--secondary-color);
+        }
+        
+        footer {
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            padding: 40px 0;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-section ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 14px;
+        }
+        
+        .footer-section ul li a:hover {
+            color: var(--secondary-color);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            width: 35px;
+            height: 35px;
+            background-color: #444;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent-color);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 14px;
+            color: #aaa;
+        }
+        
+        @media (max-width: 768px) {
+            .category-nav {
+                flex-wrap: wrap;
+                gap: 15px;
+                justify-content: flex-start;
+            }
+            
+            .hero-title {
+                font-size: 28px;
+            }
+            
+            .hero-subtitle {
+                font-size: 16px;
+            }
+            
+            .category-nav li a {
+                font-size: 12px;
+            }
+        }
+        .about-aura {
+    padding: 60px 10%;
+    background-color: rgba(255,255,255,0.95);
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin: 60px auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 36px;
+    color: #d65076;
+    margin-bottom: 50px;
+    font-weight: bold;
+}
+
+.aura-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.aura-block.reverse {
+    flex-direction: row-reverse;
+}
+
+.aura-img img {
+    width: 300px;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.aura-text {
+    flex: 1;
+    min-width: 250px;
+}
+
+.aura-text h3 {
+    font-size: 28px;
+    color: #5a2d2f;
+    margin-bottom: 12px;
+}
+
+.aura-text p {
+    font-size: 17px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.aura-quote {
+    text-align: center;
+    font-style: italic;
+    font-size: 18px;
+    color: #8b3a56;
+    margin: 30px auto 60px;
+    max-width: 600px;
+}
+
+
+    </style>
+</head>
+<script src="cart.js"></script>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <div class="main-nav">
+                    <a href="#" class="logo">AURA</a>
+                    
+                    <div class="header-actions">
+                        <a href="cart.html" class="cart-icon">🛒</a> <!-- Cart icon now links to cart.html -->
+                        <div class="menu-dots" id="menuDots">
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dot"></div>
+                            <div class="dropdown-menu" id="dropdownMenu">
+                                <a href="register.html">Register</a>
+                                <a href="cart.html">Cart</a>
+                                <a href="cu.html">Contact Us</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <ul class="category-nav">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="makeup.html">Makeup</a></li>
+                    <li><a href="hand.html">hands</a></li>
+                    <li><a href="haircare.html">Haircare</a></li>
+                    <li><a href="conc.html">concealers</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="hero-title">Aura</h1>
+            <p class="hero-subtitle">Beauty that speaks before you do.</p>
+        </div>
+    </section>
+
+ <!-- About Aura Makeup Section -->
+<div class="about-aura">
+    <h2 class="section-title">Discover the Aura Within You</h2>
+
+    <div class="aura-block">
+        <div class="aura-img">
+            <img src="https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg" alt="Bold makeup">
+        </div>
+        <div class="aura-text">
+            <h3>Elegance That Speaks</h3>
+            <p>
+                Aura Makeup crafts more than cosmetics — we create expressions. Every product is an invitation to unveil your inner confidence.
+            </p>
+        </div>
+    </div>
+
+    <blockquote class="aura-quote">
+        "Beauty is power, and makeup is something that really enhances that." – Charlotte Tilbury
+    </blockquote>
+
+    <div class="aura-block reverse">
+        <div class="aura-text">
+            <h3>Glow Beyond Limits</h3>
+            <p>
+                Our skincare-infused formulas ensure your glow isn't just surface-level — it's soul-deep. Real beauty, real you.
+            </p>
+        </div>
+        <div class="aura-img">
+            <img src="https://images.pexels.com/photos/3265458/pexels-photo-3265458.jpeg" alt="Lipstick model">
+        </div>
+    </div>
+
+    <div class="aura-block">
+        <div class="aura-img">
+            <img src="https://images.pexels.com/photos/247287/pexels-photo-247287.jpeg" alt="Glamour model">
+        </div>
+        <div class="aura-text">
+            <h3>Shades That Match Your Mood</h3>
+            <p>
+                Feeling bold? Subtle? Electric? Our palettes are designed to shift with your mood, not against it. Go with your Aura.
+            </p>
+        </div>
+    </div>
+
+    <blockquote class="aura-quote">
+        "Makeup is not a tool meant to make an ugly thing beautiful, it is meant to magnify the beauty that already exists." – Unknown
+    </blockquote>
+
+    <div class="aura-block reverse">
+        <div class="aura-text">
+            <h3>Redefine Radiance</h3>
+            <p>
+                With vegan, cruelty-free products and a heart rooted in self-love, Aura Makeup is the modern girl's magic wand.
+            </p>
+        </div>
+        <div class="aura-img">
+            <img src="https://images.pexels.com/photos/6311398/pexels-photo-6311398.jpeg" alt="Model close-up">
+        </div>
+    </div>
+
+    <div class="aura-block">
+        <div class="aura-img">
+            <img src="https://images.pexels.com/photos/3762874/pexels-photo-3762874.jpeg" alt="Confident pose">
+        </div>
+        <div class="aura-text">
+            <h3>Confidence in Every Swipe</h3>
+            <p>
+                From office mornings to midnight events, Aura Makeup stays with you — empowering your steps and elevating your style.
+            </p>
+        </div>
+    </div>
+
+    <blockquote class="aura-quote">
+        "Be bold, be brave, be unapologetically you. That’s the Aura way." – Aura Brand Philosophy
+    </blockquote>
+</div>
+
+    <!-- Products Section -->
+    <section class="container">
+        <h2 class="section-title">Our Products</h2>
+        
+        
+        
+        <div class="products-grid">
+            <!-- Product 1 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://en.auramakeup.eu/files/thumbs/files/images/slike_proizvoda/thumbs_800/DTOUCH022_800_1089px.jpg.webp" alt="Concealer">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Luminous Concealer</h3>
+        <p class="product-price">$24.99</p>
+        <p class="product-description">Full coverage concealer with hydrating formula for a radiant finish.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Luminous Concealer" 
+           data-price="24.99" 
+           data-image="https://en.auramakeup.eu/files/thumbs/files/images/slike_proizvoda/thumbs_800/DTOUCH022_800_1089px.jpg.webp">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Product 2 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUhKTUv_XCMcw0lxOcZT27RoUgmfbzqJPt1aQYkDe7u1KqMl3JAJjCH58u-a_W31DaPTk&usqp=CAU" alt="Hair shampoo">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Gentle Hair Shampoo</h3>
+        <p class="product-price">$16.99</p>
+        <p class="product-description">Gentle cleansing shampoo that removes buildup, revealing softer, healthier hair.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Gentle Hair Shampoo" 
+           data-price="16.99" 
+           data-image="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUhKTUv_XCMcw0lxOcZT27RoUgmfbzqJPt1aQYkDe7u1KqMl3JAJjCH58u-a_W31DaPTk&usqp=CAU">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Product 3 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://battiandco.com/cdn/shop/files/7C6E123A-8383-4CC2-93AA-B8354FD4CE68.jpg?v=1728041353&width=1445" alt="Hand Care Gift Set">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Complete Hand Care Gift Set</h3>
+        <p class="product-price">$39.99</p>
+        <p class="product-description">Luxury gift box with hand cream, scrub, cuticle oil and hand mask for a complete care routine.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Complete Hand Care Gift Set" 
+           data-price="39.99" 
+           data-image="https://battiandco.com/cdn/shop/files/7C6E123A-8383-4CC2-93AA-B8354FD4CE68.jpg?v=1728041353&width=1445">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Product 4 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://byscosmetics.eu/media/catalog/product/p/a/palette-20-fards-aura.jpg" alt="Eyeshadow Palette">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Nude Eyeshadow Palette</h3>
+        <p class="product-price">$42.99</p>
+        <p class="product-description">12 highly pigmented neutral shades in matte and shimmer finishes.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Nude Eyeshadow Palette" 
+           data-price="42.99" 
+           data-image="https://byscosmetics.eu/media/catalog/product/p/a/palette-20-fards-aura.jpg">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Product 5 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://m.media-amazon.com/images/I/61zpcYA+ewL._AC_UF1000,1000_QL80_.jpg" alt="Hair Gel">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Hair Gel</h3>
+        <p class="product-price">$22.99</p>
+        <p class="product-description">Lightweight hair gel with peptides and antioxidants for strong, healthy, and nourished hair.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Hair Gel" 
+           data-price="22.99" 
+           data-image="https://m.media-amazon.com/images/I/61zpcYA+ewL._AC_UF1000,1000_QL80_.jpg">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+<!-- Product 6 -->
+<div class="product-card">
+    <div class="product-image">
+        <img src="https://en.auramakeup.eu/files/thumbs/files/images/slike_proizvoda/thumbs_380/BBROW_380_520px.jpg.webp" alt="Brow Gel">
+    </div>
+    <div class="product-details">
+        <h3 class="product-name">Aura Brow Gel</h3>
+        <p class="product-price">$16.99</p>
+        <p class="product-description">Tinted gel that shapes and fills brows for a natural, polished look.</p>
+        <a href="#" class="btn add-to-cart" 
+           data-name="Aura Brow Gel" 
+           data-price="16.99" 
+           data-image="https://en.auramakeup.eu/files/thumbs/files/images/slike_proizvoda/thumbs_380/BBROW_380_520px.jpg.webp">
+           Add to Cart
+        </a>
+    </div>
+</div>
+
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>About Aura</h3>
+                <ul>
+                    <li><a href="ourstory.html">Our Story</a></li>
+                    <li><a href="phillosophy.html">Philosophy</a></li>
+                    <li><a href="sustainability.html">Sustainability</a></li>
+                    <li><a href="carrier.html">Careers</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Customer Care</h3>
+                <ul>
+                    <li><a href="cu.html">Contact Us</a></li>
+                    <li><a href="faq.html">FAQs</a></li>
+                    <li><a href="sar.html">Shipping & Returns</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Information</h3>
+                <ul>
+                    <li><a href="pap.html">Privacy Policy</a></li>
+                    <li><a href="TNC.html">Terms & Conditions</a></li>
+                    <li><a href="cookie.html">Cookie Policy</a></li>
+                    <li><a href="accessibility.html">Accessibility</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <p>Subscribe to our newsletter for exclusive offers and beauty tips.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" target="_blank" class="social-link">
+                        <img src="https://cdn-icons-png.flaticon.com/24/733/733547.png" alt="Facebook">
+                    </a>
+                    <a href="https://instagram.com" target="_blank" class="social-link">
+                        <img src="https://cdn-icons-png.flaticon.com/24/2111/2111463.png" alt="Instagram">
+                    </a>
+                    <a href="https://twitter.com" target="_blank" class="social-link">
+                        <img src="https://cdn-icons-png.flaticon.com/24/733/733579.png" alt="Twitter">
+                    </a>
+                    <a href="https://youtube.com" target="_blank" class="social-link">
+                        <img src="https://cdn-icons-png.flaticon.com/24/1384/1384060.png" alt="YouTube">
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright container">
+            <p>&copy; 2025 Aura. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Toggle dropdown menu
+        const menuDots = document.getElementById('menuDots');
+        const dropdownMenu = document.getElementById('dropdownMenu');
+        
+        menuDots.addEventListener('click', function() {
+            dropdownMenu.classList.toggle('active');
+        });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!menuDots.contains(event.target)) {
+                dropdownMenu.classList.remove('active');
+            }
+        });
+        
+        // Filter buttons
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
